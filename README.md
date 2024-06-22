@@ -28,3 +28,5 @@ trunk serve
 TODO:
 * add zeromq,mqtt realtime data
 * realtime plot line and scatter
+## example show
+![example.png](example.png)
