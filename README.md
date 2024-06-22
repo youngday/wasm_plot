@@ -1,12 +1,16 @@
-# leptos-demo
+# wasm_plot
 
-## run charming in wasm by leptos framework
+## source
+forked from gallery and examples of charming
 
-* copy
-  we use "gallery/src/bar" files as example,cp what you want in "gallery/src "
-```sh
-cp ./gallery/src/bar ./examples/leptos-demo/src
-```
+* charming
+https://github.com/yuankunzhang/charming
+
+* leptos
+https://github.com/leptos-rs/leptos
+
+## run 
+ 
 * install wasm runtime 
 more,please check leptos 
 ```sh
@@ -15,6 +19,12 @@ cargo install trunk
 ```
 * run
 ```sh
-cd examples/leptos-demo
 trunk serve
 ```
+## goal
+
+* plot data to web(charming)
+* full stack(leptos)
+TODO:
+* add zeromq,mqtt realtime data
+* realtime plot line and scatter
