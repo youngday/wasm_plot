@@ -1,5 +1,5 @@
 use charming::{Chart, WasmRenderer};
-use leptos::*;
+use leptos::prelude::*;
 
 use lazy_static::lazy_static;
 use std::collections::BTreeMap;
@@ -86,7 +86,7 @@ use line::line_gradient::chart;
 
 #[component]
 pub fn App() -> impl IntoView {
-    let action = create_action(|_input: &()| async {
+    let action = Action::new(|_input: &()| async {
         let chart: Chart = chart(); //just change your chart
         WasmRenderer::new(600, 400).render("chart", &chart).unwrap();
     });
@@ -100,5 +100,5 @@ pub fn App() -> impl IntoView {
 }
 
 fn main() {
-    mount_to_body(App);
+    leptos::mount::mount_to_body(App);
 }
