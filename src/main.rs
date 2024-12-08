@@ -1,8 +1,8 @@
 use charming::{Chart, WasmRenderer};
 use leptos::prelude::*;
 
-use lazy_static::lazy_static;
-use std::collections::BTreeMap;
+// use lazy_static::lazy_static;
+// use std::collections::BTreeMap;
 
 mod aria;
 mod bar;
