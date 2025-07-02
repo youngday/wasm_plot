@@ -6,17 +6,21 @@ use charming::{
 };
 
 pub fn chart() -> Chart {
-    let smooth =0.5;
     Chart::new()
         .title(Title::new().text("Stacked Line"))
         .tooltip(Tooltip::new().trigger(Trigger::Axis))
-        .legend(Legend::new().data(vec![
-            "Email",
-            "Union Ads",
-            "Video Ads",
-            "Direct",
-            "Search Engine",
-        ]))
+        .legend(
+            Legend::new()
+                .data(vec![
+                    "Email",
+                    "Union Ads",
+                    "Video Ads",
+                    "Direct",
+                    "Search Engine",
+                    "Affiliate Marketing",
+                ])
+                .selected([("Affiliate Marketing", false)]),
+        )
         .grid(
             Grid::new()
                 .left("3%")
@@ -36,7 +40,6 @@ pub fn chart() -> Chart {
             Line::new()
                 .name("Email")
                 .stack("Total")
-                .smooth(smooth)
                 .data(vec![120, 132, 101, 134, 90, 230, 210]),
         )
         .series(
@@ -62,5 +65,11 @@ pub fn chart() -> Chart {
                 .name("Search Engine")
                 .stack("Total")
                 .data(vec![820, 932, 901, 934, 1290, 1330, 1320]),
+        )
+        .series(
+            Line::new()
+                .name("Affiliate Marketing")
+                .stack("Total")
+                .data(vec![180, 232, 210, 290, 250, 400, 370]),
         )
 }

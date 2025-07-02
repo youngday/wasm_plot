@@ -1,47 +1,26 @@
 use charming::{
     component::{Axis, Grid, Title},
-    datatype::{Dataset, Transform},
+    datatype::{DataFrame, DataPoint, DataPointItem},
     element::{
-        font_settings::FontWeight, AxisPointer, AxisPointerType, AxisType, SplitArea, SplitLine,
-        TextStyle, Tooltip, Trigger,
+        font_settings::FontWeight, AxisPointer, AxisPointerType, AxisType, ItemStyle, SplitArea,
+        SplitLine, TextStyle, Tooltip, Trigger,
     },
     series::{Boxplot, Scatter},
     Chart,
 };
 
 pub fn chart() -> Chart {
-    let data: Vec<Vec<i32>> = vec![
-        vec![
-            850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980, 930, 650, 760, 810, 1000,
-            1000, 960, 960,
-        ],
-        vec![
-            960, 940, 960, 940, 880, 800, 850, 880, 900, 840, 830, 790, 810, 880, 880, 830, 800,
-            790, 760, 800,
-        ],
-        vec![
-            880, 880, 880, 860, 720, 720, 620, 860, 970, 950, 880, 910, 850, 870, 840, 840, 850,
-            840, 840, 840,
-        ],
-        vec![
-            890, 810, 810, 820, 800, 770, 760, 740, 750, 760, 910, 920, 890, 860, 880, 720, 840,
-            850, 850, 780,
-        ],
-        vec![
-            890, 840, 780, 810, 760, 810, 790, 810, 820, 850, 870, 870, 810, 740, 810, 940, 950,
-            800, 810, 870,
-        ],
+    let data: DataFrame = vec![
+        vec![655, 850, 940, 980, 1175].into(),
+        vec![672.5, 800.0, 845.0, 885.0, 1012.5].into(),
+        vec![780, 840, 855, 880, 940].into(),
+        vec![621.25, 767.5, 815.0, 865.0, 1011.25].into(),
+        DataPoint::Item(
+            DataPointItem::new(vec![713.75, 807.5, 830.0, 870.0, 963.75])
+                .item_style(ItemStyle::new().border_color("red")),
+        ),
     ];
-
-    let ds = Dataset::new()
-        .source(data)
-        .transform(r#"{ "type": "boxplot", "config": { "itemNameFormatter": "expr {value}" } }"#)
-        .transform(
-            Transform::new()
-                .from_dataset_index(1)
-                .from_transform_result(1),
-        );
-
+    let outlier = vec![vec![2, 960], vec![2, 980], vec![2, 750], vec![4, 980]];
     Chart::new()
         .title(
             Title::new()
@@ -62,7 +41,6 @@ pub fn chart() -> Chart {
                 .left("10%")
                 .top("90%"),
         )
-        .dataset(ds)
         .tooltip(
             Tooltip::new()
                 .trigger(Trigger::Item)
@@ -83,6 +61,6 @@ pub fn chart() -> Chart {
                 .name("km/s minus 299,000")
                 .split_area(SplitArea::new().show(true)),
         )
-        .series(Boxplot::new().name("boxplot").dataset_index(1))
-        .series(Scatter::new().name("outlier").dataset_index(2))
+        .series(Boxplot::new().name("boxplot").data(data))
+        .series(Scatter::new().name("outlier").data(outlier))
 }
