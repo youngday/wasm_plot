@@ -83,7 +83,7 @@ fn make_data() -> Vec<Vec<f64>> {
     for _ in 0..18 {
         let mut data0 = vec![];
         for _ in 0..100 {
-            data0.push(rng.gen::<f64>() * 200.0);
+            data0.push(rng.r#gen::<f64>() * 200.0);  // Fixed method call
         }
         data.push(data0);
     }
