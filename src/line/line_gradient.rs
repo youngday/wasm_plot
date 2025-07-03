@@ -68,6 +68,7 @@ pub fn chart() -> Chart {
     });
 
     Chart::new()
+        .background_color("#f0f0f0")  // Add this line for light gray background
         .title(
             Title::new()
                 .text("Gradient along the y axis")
